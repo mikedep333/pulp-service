@@ -13,7 +13,15 @@ spec:
       type: string
       description: URL of the Git repository use for fetching the tasks
       default: 'https://github.com/RedHatInsights/bonfire-tekton'
+    - name: URL_ORIG
+      type: string
+      description: URL of the Git repository use for fetching the tasks
+      default: 'https://github.com/RedHatInsights/bonfire-tekton'
     - name: REVISION
+      type: string
+      description: Git commit revision to use for fetching the tasks
+      default: main
+    - name: REVISION_ORIG
       type: string
       description: Git commit revision to use for fetching the tasks
       default: main
@@ -96,9 +104,9 @@ spec:
         resolver: git
         params:
           - name: url
-            value: "$(params.URL)"
+            value: "$(params.URL_ORIG)"
           - name: revision
-            value: "$(params.REVISION)"
+            value: "$(params.REVISION_ORIG)"
           - name: pathInRepo
             value: tasks/teardown.yaml
   tasks:
@@ -114,9 +122,9 @@ spec:
         resolver: git
         params:
           - name: url
-            value: "$(params.URL)"
+            value: "$(params.URL_ORIG)"
           - name: revision
-            value: "$(params.REVISION)"
+            value: "$(params.REVISION_ORIG)"
           - name: pathInRepo
             value: tasks/reserve-namespace.yaml
     - name: deploy-application
@@ -149,9 +157,9 @@ spec:
         resolver: git
         params:
           - name: url
-            value: "$(params.URL)"
+            value: "$(params.URL_ORIG)"
           - name: revision
-            value: "$(params.REVISION)"
+            value: "$(params.REVISION_ORIG)"
           - name: pathInRepo
             value: tasks/deploy.yaml
     - name: pulp-functional-tests
