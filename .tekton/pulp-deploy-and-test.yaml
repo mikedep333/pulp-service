@@ -167,23 +167,15 @@ spec:
         - deploy-application
       params:
         - name: BONFIRE_IMAGE
+          type: string
           value: "$(params.BONFIRE_IMAGE)"
         - name: NS
+          type: string
           value: "$(tasks.reserve-namespace.results.NS)"
         - name: EPHEMERAL_ENV_PROVIDER_SECRET
+          type: string
           value: "$(params.EPHEMERAL_ENV_PROVIDER_SECRET)"
       taskSpec:
-        spec:
-          - name: BONFIRE_IMAGE
-            type: string
-            description: The container Bonfire image to use for the tekton tasks
-            default: quay.io/redhat-user-workloads/hcc-devprod-tenant/hcc-cicd-tools/cicd-tools:834176766e3f911ffa24bfacff59dd15126e4b3a
-          - name: EPHEMERAL_ENV_PROVIDER_SECRET
-            type: string
-            default: ephemeral-env-provider
-          - name: NS
-            type: string
-            description: Namespace name to deploy the application to
         steps:
           - name: functional-tests
             image: "$(params.BONFIRE_IMAGE)"
